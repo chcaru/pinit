@@ -1,2 +1,4 @@
 
 npm install
+
+mkdir data

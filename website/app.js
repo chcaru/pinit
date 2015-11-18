@@ -8,24 +8,24 @@ pinit.config(['$stateProvider', '$urlRouterProvider', '$mdThemingProvider', func
     $stateProvider
         .state('board', {
             url: '/',
-            template: 'views/board.html',
+            templateUrl: 'views/board.html',
             controller: 'BoardController'
         })
         .state('post', {
             url: '/post/{postId}',
-            template: 'views/post.html',
+            templateUrl: 'views/post.html',
             controller: 'PostController'
         })
         .state('my', {
             url: '/my/{userId}',
-            template: 'views/my.html',
+            templateUrl: 'views/my.html',
             controller: 'MyController'
         });
 
     $mdThemingProvider
         .theme('default')
         .primaryPalette('cyan')
-        .accentPalette('grey-blue')
+        .accentPalette('blue-grey')
         .warnPalette('red')
         .backgroundPalette('grey');
 }]);
