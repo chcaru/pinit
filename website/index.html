@@ -24,11 +24,23 @@
 
         <div ng-app="pinit" ng-cloak>
             <md-content>
-                <md-toolbar>
-                    <div class="md-toolbar-tools">
-                        <h1>Pinit</h1>
-                    </div>
-                </md-toolbar>
+              <md-toolbar>
+                <div class="md-toolbar-tools">
+                  <md-button class="md-icon-button" aria-label="Settings">
+                    <md-icon md-svg-icon="img/icons/menu.svg"></md-icon>
+                  </md-button>
+                  <h2>
+                    <span>PinIt</span>
+                  </h2>
+                  <span flex=""></span>
+                  <md-button class="md-icon-button" aria-label="Favorite">
+                    My
+                  </md-button>
+                  <md-button class="md-icon-button" aria-label="More">
+                    +
+                  </md-button>
+                </div>
+              </md-toolbar>
                 <br>
                 <div ui-view></div>
             </md-content>
