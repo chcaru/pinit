@@ -1,5 +1,6 @@
 
-pinit.controller('BoardController', ['$scope', '$mdToast', 'board', function($scope, $mdToast, board) {
+pinit.controller('BoardController', 
+    ['$scope', '$mdToast', 'board', function($scope, $mdToast, board) {
 
     $scope.cols = 15;
 
@@ -16,20 +17,19 @@ pinit.controller('BoardController', ['$scope', '$mdToast', 'board', function($sc
         }).reverse();
 
         $scope.$apply();
+
+        board.on('newPost', function(post) {
+            $scope.posts.splice(0, 0, angular.extend({
+                rows: 3,
+                cols: 3,
+                background: 'url(' + post.url + ')'
+            }, post));
+
+            $scope.$apply();
+
+            $mdToast.show($mdToast.simple().content('New Post!'));
+        });
     });
 
     board.emit('refresh');
-
-    board.on('newPost', function(post) {
-
-        $scope.posts.splice(0, 0, angular.extend({
-            rows: 3,
-            cols: 3,
-            background: 'url(' + post.url + ')'
-        }, post));
-
-        $scope.$apply();
-
-        $mdToast.show($mdToast.simple().content('New Post!'));
-    });
 }]);
