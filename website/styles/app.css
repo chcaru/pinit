@@ -1,1 +1,8 @@
 
+.board {
+    height: 100%;
+}
+
+.post {
+    background-size: 150% !important;
+}

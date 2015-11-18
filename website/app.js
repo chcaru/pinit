@@ -24,13 +24,12 @@ pinit.config(['$stateProvider', '$urlRouterProvider', '$mdThemingProvider', func
 
     $mdThemingProvider
         .theme('default')
-        .primaryPalette('cyan')
+        .primaryPalette('blue')
         .accentPalette('blue-grey')
         .warnPalette('red')
         .backgroundPalette('grey');
 }]);
 
 var pinitContext = {
-    api: 'http://localhost',
     io: 'http://localhost'
 };

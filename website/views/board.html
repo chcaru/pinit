@@ -1,3 +1,17 @@
-<div>
-    Home / Board
+<div class="board">
+    <md-content>
+        <md-grid-list md-cols="{{cols}}" md-gutter="5px" md-row-height="1:1">
+            <md-grid-tile ng-repeat="post in posts"
+                md-rowspan="{{post.rows}}"
+                md-colspan="{{post.cols}}"
+                ng-style="{
+                    'background': post.background
+                }"
+                class="post">
+                <md-grid-tile-footer>
+                    <h3>{{post.title}}</h3>
+                </md-grid-tile-footer>
+            </md-grid-tile>
+        </md-grid-list>
+    </md-content>
 </div>
