@@ -1,8 +1,18 @@
 
 .board {
-    height: 100%;
+    height: calc(100% - 64px);
+    padding: 5px;
 }
 
 .post {
     background-size: 150% !important;
+    transition: all 0.7s ease;
+}
+
+.post .postFooter {
+    height: auto;
+}
+
+.post .postFooter .postTitle {
+    margin: 16px 0 0 16px;
 }

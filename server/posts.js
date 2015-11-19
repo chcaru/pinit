@@ -41,9 +41,8 @@ Posts.prototype.adjust = function(post, change) {
         post.position--;
 
         this.notifyMove({
-            id: post.id,
-            before: postBelow.position,
-            current: post.position
+            postId: post.id,
+            move: -1
         });
 
     } else if (change > 0 && above < this.recent.length && activity > this.recent[above].activity) {
@@ -57,9 +56,8 @@ Posts.prototype.adjust = function(post, change) {
         post.position++;
 
         this.notifyMove({
-            id: post.id,
-            before: postAbove.position,
-            current: post.position
+            postId: post.id,
+            move: 1
         });
     }
 

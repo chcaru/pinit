@@ -8,8 +8,24 @@
                     'background': post.background
                 }"
                 class="post">
-                <md-grid-tile-footer>
-                    <h3>{{post.title}}</h3>
+                <md-grid-tile-footer class="postFooter">
+                    <div class="postTitle">{{post.title}}</div>
+                    <div>
+                        <md-button class="md-icon-button"
+                            ng-click="vote(post.id, 1)">
+                            <i class="fa fa-chevron-up"></i>
+                            {{post.votes.up}}
+                        </md-button>
+                        <md-button class="md-icon-button"
+                            ng-click="vote(post.id, -1)">
+                            <i class="fa fa-chevron-down"></i>
+                            {{post.votes.down}}
+                        </md-button>
+                        <md-button class="md-icon-button">
+                            <i class="fa fa-comments"></i>
+                            {{post.comments.length}}
+                        </md-button>
+                    </div>
                 </md-grid-tile-footer>
             </md-grid-tile>
         </md-grid-list>

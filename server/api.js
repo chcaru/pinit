@@ -12,7 +12,6 @@ function PinitAPI() {
     var io = require('socket.io')(server);
     app.use('/', express.static('../website'));
 
-    //app.listen(80);
     server.listen(80);
 
     var posts = new Posts();
