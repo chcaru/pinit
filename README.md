@@ -1,4 +1,4 @@
-# pinit
+# pinit - An inferior cloud project compared to Fallout 4 Character Creator
 
 This is a simple image board. It uses Angular, Angular Material Design, NodeJS, and WebSockets to provide a realtime image board.
 
