@@ -1,0 +1,52 @@
+<md-dialog aria-label="{{post.title}}" ng-cloak>
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>Comments for {{post.title}}</h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="close()">
+                <md-icon aria-label="Close dialog">
+                    <i class="fa fa-close"></i>
+                </md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-dialog-content style="max-width:800px;max-height:810px;min-width:425px;">
+        <div class="md-dialog-content">
+            <md-list>
+                <md-list-item class="md-2-line">
+                    <form flex name="commentForm"
+                        ng-submit="submitComment()"
+                        autocomplete="off">
+                        <md-input-container class="md-block">
+                            <label>Your Comment</label>
+                            <input md-maxlength="100" md-minlength="2"
+                                name="comment"
+                                ng-model="comment">
+                            <div ng-messages="commentForm.comment.$error">
+                                <div ng-message="md-minlength">
+                                    Say a little more than that...
+                                </div>
+                                <div ng-message="md-maxlength">
+                                    Too much! Say less...
+                                </div>
+                            </div>
+                        </md-input-container>
+                        <!-- <md-button class="md-raised md-primary"
+                            ng-click="submitComment()">
+                            Post Comment
+                        </md-button> -->
+                        <input class="ng-hide" type="submit" id="submit">
+                    </form>
+                    <md-divider></md-divider>
+                </md-list-item>
+                <md-list-item class="md-2-line"
+                    ng-repeat="comment in post.comments track by $index">
+                    <div class="md-list-item-text">
+                        <h3>{{comment}}</h3>
+                    </div>
+                    <md-divider ng-if="!$last"></md-divider>
+                </md-list-item>
+            </md-list>
+        </div>
+    </md-dialog-content>
+</md-dialog>

@@ -60,7 +60,7 @@ function PinitAPI() {
     });
 
     posts.onComment('board', function(postComment) {
-        board.to('comment-' + postComment.postId).emit('newComment', postComment)
+        board.to('comment-' + postComment.postId).emit('newComment', postComment);
     });
 
 }

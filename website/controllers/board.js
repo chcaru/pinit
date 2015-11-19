@@ -1,6 +1,7 @@
 
 pinit.controller('BoardController',
-    ['$scope', '$mdToast', 'board', function($scope, $mdToast, board) {
+    ['$scope', '$mdToast', '$mdDialog', 'board',
+        function($scope, $mdToast, $mdDialog, board) {
 
     $scope.cols = 15;
     $scope.posts = [];
@@ -14,11 +15,33 @@ pinit.controller('BoardController',
     }
 
     $scope.vote = function(postId, vote) {
+
+        if (localStorage['v-' + postId]) {
+            return;
+        }
+
         board.emit('vote', {
             postId: postId,
             vote: vote
         });
+
+        localStorage['v-' + postId] = vote;
     }
+
+    $scope.openComments = function(post, $event) {
+
+        var dialogScope = $scope.$new(true);
+        dialogScope.post = post;
+
+        $mdDialog.show({
+            controller: 'CommentsDialogController',
+            scope: dialogScope,
+            targetEvent: $event,
+            templateUrl: 'views/dialogs/comments.html',
+            parent: angular.element(document.body),
+            clickOutsideToClose: true
+        });
+    };
 
     board.on('init', function(posts) {
 
@@ -61,8 +84,13 @@ pinit.controller('BoardController',
             $scope.$apply();
         });
 
-        for (var post in $scope.posts) {
-            subscribeToPost($scope.posts[post]);
+        for (var postIndex in $scope.posts) {
+
+            var post = $scope.posts[postIndex];
+
+            subscribeToPost(post);
+
+            post.comments = post.comments.reverse();
         }
 
         $scope.$apply();
@@ -91,8 +119,6 @@ pinit.controller('BoardController',
             post.comments.splice(0, 0, postComment.comment);
         }
     });
-
-
 
     board.emit('refresh');
 }]);

@@ -7,11 +7,11 @@ function uuid() {
 
 function userService() {
 
-    this.userId = localStorage.getItem('userId');
+    this.userId = localStorage.userId;
 
     if (!this.userId) {
         this.userId = uuid();
-        localStorage.setItem('userId', this.userId);
+        localStorage.userId = this.userId;
     }
 }
 
