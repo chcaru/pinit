@@ -1,0 +1,47 @@
+<md-dialog aria-label="Add a New Post" ng-cloak>
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>Add a New Post!</h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="close()">
+                <md-icon aria-label="Close dialog">
+                    <i class="fa fa-close"></i>
+                </md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-dialog-content style="max-width:900px;max-height:910px;min-width:550px;">
+        <div class="md-dialog-content">
+            <form flex name="postForm"
+                ng-submit="submitPost()"
+                autocomplete="off">
+                <md-input-container class="md-block">
+                    <label>Title</label>
+                    <input md-maxlength="35" md-minlength="3"
+                        name="title"
+                        ng-model="title">
+                </md-input-container>
+                <md-input-container class="md-block">
+                    <label>Description</label>
+                    <textarea ng-model="desc"
+                        columns="1"
+                        md-maxlength="150"
+                        md-minlength="3"
+                        rows="5"></textarea>
+                </md-input-container>
+                <md-input-container class="md-block">
+                    <label>Image URL</label>
+                    <input name="url" ng-model="url">
+                </md-input-container>
+                <input class="ng-hide" type="submit" id="submit">
+                <div layout="row">
+                    <span flex></span>
+                    <md-button class="md-raised md-primary"
+                        ng-click="submitPost()">
+                        Create Post
+                    </md-button>
+                </div>
+            </form>
+        </div>
+    </md-dialog-content>
+</md-dialog>

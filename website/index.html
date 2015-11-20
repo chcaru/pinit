@@ -21,6 +21,7 @@
         <script src="services/board.js"></script>
         <script src="services/user.js"></script>
         <script src="controllers/comments.js"></script>
+        <script src="controllers/addPost.js"></script>
         <script src="controllers/board.js"></script>
         <script src="controllers/post.js"></script>
         <script src="controllers/my.js"></script>
@@ -28,18 +29,16 @@
         <div ng-app="pinit" ng-cloak>
             <md-toolbar>
                 <div class="md-toolbar-tools">
-                    <md-button class="md-icon-button" aria-label="Home" href="#/">
-                        PinIt
+                    <md-button class="logo md-primary" aria-label="Home" href="#/">
+                        <h3>Picit</h3>
                     </md-button>
-                    <span flex=""></span>
+                    <span flex></span>
                     <md-button class="md-icon-button" aria-label="My">
                         My
                     </md-button>
-                    <md-button class="md-icon-button" aria-label="Post">
-                        <i class="fa fa-plus"></i>
-                    </md-button>
                 </div>
             </md-toolbar>
+            <div class="seperator"></div>
             <div ui-view></div>
         </div>
     </body>

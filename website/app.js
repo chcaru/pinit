@@ -31,5 +31,6 @@ pinit.config(['$stateProvider', '$urlRouterProvider', '$mdThemingProvider', func
 }]);
 
 var pinitContext = {
-    io: 'http://localhost'
+    io: 'http://localhost' // debug
+    //io: 'http://picit.cloudapp.net'
 };

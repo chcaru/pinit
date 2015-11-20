@@ -3,10 +3,10 @@ pinit.controller('BoardController',
     ['$scope', '$mdToast', '$mdDialog', 'board',
         function($scope, $mdToast, $mdDialog, board) {
 
-    $scope.cols = $(window).width() / 115;
+    $scope.cols = $(window).width() / 65;
 
     window.onresize = function() {
-        $scope.cols = $(window).width() / 115;
+        $scope.cols = $(window).width() / 65;
         $scope.$apply();
     };
 
@@ -28,12 +28,14 @@ pinit.controller('BoardController',
 
         // Reduce by 1 so that the post with the minimum activity
         // doesn't get reduced to 0
-        var min = _.min(posts, function(post) {
-            return post.activity;
-        }).activity - 1;
+        // var min = _.min(posts, function(post) {
+        //     return post.activity;
+        // }).activity - 1;
+
+        var min = 0;
 
         var delta = max - min;
-        var binCount = 3;
+        var binCount = 4;
         var binDelta = delta / binCount;
         var binDeltaRatio = binDelta / delta;
 
@@ -41,18 +43,21 @@ pinit.controller('BoardController',
 
             var post = posts[postIndex];
 
+            if (post.activity <= 0) {
+                post.rows = post.cols = 3;
+                continue;
+            }
+
             // Fit it between 0 and 1.
-            var normalizedActivity = (post.activity - min) / delta;
+            var normalizedActivity = post.activity / delta;
 
             // Adjust the distribution of values:
-            // TODO: try other distribution functions out
-            // Adjust the distribution to be higher than lower
-            // ( sqrt(0 < x < 1) > x )
-            //normalizedActivity = Math.sqrt(normalizedActivity);
+            // Adjust the distribution to be lower than higher
+            //normalizedActivity = Math.pow(normalizedActivity, 1.337)
 
             // Select bin, round up, and add 1 to place the lower
             // bin size limit to 2
-            var size = Math.ceil(normalizedActivity / binDeltaRatio) + 1;
+            var size = Math.ceil(normalizedActivity / binDeltaRatio) + 2;
 
             // TODO: maybe adjust # of cols based on width vs height?
             post.rows = post.cols = size;
@@ -62,7 +67,7 @@ pinit.controller('BoardController',
     $scope.vote = function(postId, vote) {
 
         if (localStorage['v-' + postId]) {
-            return;
+            //return;
         }
 
         board.emit('vote', {
@@ -92,6 +97,20 @@ pinit.controller('BoardController',
         });
     };
 
+    $scope.createPost = function($event) {
+
+        $mdDialog.show({
+            controller: 'AddPostDialogController',
+            scope: $scope.$new(true),
+            targetEvent: $event,
+            templateUrl: 'views/dialogs/addPost.html',
+            parent: angular.element(document.body),
+            clickOutsideToClose: true
+        }).then(function(post) {
+
+        });
+    }
+
     board.on('init', function(posts) {
 
 
@@ -106,7 +125,7 @@ pinit.controller('BoardController',
         adjustSizes($scope.posts);
 
         board.on('newPost', function(post) {
-
+            // TODO: investigate what push causes weird behavior...
             $scope.posts.splice(0, 0, angular.extend({
                 rows: 2,
                 cols: 2,

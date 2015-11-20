@@ -19,4 +19,6 @@ userService.prototype.getUserId = function () {
     return this.userId;
 };
 
-pinit.factory('userService', [userService]);
+pinit.factory('userService', function() {
+    return new userService();
+});

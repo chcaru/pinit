@@ -1,24 +1,38 @@
 
-body {
-    background-color: #333;
-}
-
-md-grid-list {
-    background-color: #333;
+md-toolbar {
+    position: fixed;
+    top: 0;
 }
 
 md-content {
-    background-color: #333;
+    height: calc(100% - 75px);
+}
+
+.logo {
+    font-size: 24px;
+    /*width: auto;*/
+    /*margin-left: 0px;*/
+}
+
+.seperator {
+    height: 65px;
+}
+
+.addPostFab {
+    position: fixed;
+    top: 65px;
+    left: 0;
+    font-size: 26px;
 }
 
 .board {
-    height: calc(100% - 74px);
     padding: 5px;
 }
 
 .post {
     background-size: 150% !important;
     transition: all 0.7s ease;
+    -webkit-user-select: none;
 }
 
 .post .postButton {

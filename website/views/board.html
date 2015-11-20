@@ -1,5 +1,12 @@
 <div class="board">
     <md-content>
+        <md-button class="md-fab md-primary md-hue-2 addPostFab"
+            aria-label="New Post"
+            ng-click="createPost($event)">
+            <md-icon>
+                <i class="fa fa-plus"></i>
+            </md-icon>
+        </md-button>
         <md-grid-list md-cols="{{cols}}" md-gutter="5px" md-row-height="1:1">
             <md-grid-tile ng-repeat="post in posts"
                 md-rowspan="{{post.rows}}"
