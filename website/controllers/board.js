@@ -3,7 +3,13 @@ pinit.controller('BoardController',
     ['$scope', '$mdToast', '$mdDialog', 'board',
         function($scope, $mdToast, $mdDialog, board) {
 
-    $scope.cols = 15;
+    $scope.cols = $(window).width() / 115;
+
+    window.onresize = function() {
+        $scope.cols = $(window).width() / 115;
+        $scope.$apply();
+    };
+
     $scope.posts = [];
 
     var postLookup = {};
@@ -12,6 +18,45 @@ pinit.controller('BoardController',
         board.emit('subOnVote', post.id);
         board.emit('subOnComment', post.id);
         postLookup[post.id] = post;
+    }
+
+    function adjustSizes(posts) {
+
+        var max = _.max(posts, function(post) {
+            return post.activity;
+        }).activity;
+
+        // Reduce by 1 so that the post with the minimum activity
+        // doesn't get reduced to 0
+        var min = _.min(posts, function(post) {
+            return post.activity;
+        }).activity - 1;
+
+        var delta = max - min;
+        var binCount = 3;
+        var binDelta = delta / binCount;
+        var binDeltaRatio = binDelta / delta;
+
+        for (var postIndex in posts) {
+
+            var post = posts[postIndex];
+
+            // Fit it between 0 and 1.
+            var normalizedActivity = (post.activity - min) / delta;
+
+            // Adjust the distribution of values:
+            // TODO: try other distribution functions out
+            // Adjust the distribution to be higher than lower
+            // ( sqrt(0 < x < 1) > x )
+            //normalizedActivity = Math.sqrt(normalizedActivity);
+
+            // Select bin, round up, and add 1 to place the lower
+            // bin size limit to 2
+            var size = Math.ceil(normalizedActivity / binDeltaRatio) + 1;
+
+            // TODO: maybe adjust # of cols based on width vs height?
+            post.rows = post.cols = size;
+        }
     }
 
     $scope.vote = function(postId, vote) {
@@ -26,6 +71,10 @@ pinit.controller('BoardController',
         });
 
         localStorage['v-' + postId] = vote;
+    }
+
+    $scope.hasVoted = function(postId, vote) {
+        return localStorage['v-' + postId] == vote;
     }
 
     $scope.openComments = function(post, $event) {
@@ -45,21 +94,26 @@ pinit.controller('BoardController',
 
     board.on('init', function(posts) {
 
+
         $scope.posts = _.map(posts, function(post) {
             return angular.extend({
-                rows: 3,
-                cols: 3,
+                rows: 2,
+                cols: 2,
                 background: 'url(' + post.url + ') no-repeat center'
             }, post);
         }).reverse();
 
+        adjustSizes($scope.posts);
+
         board.on('newPost', function(post) {
 
             $scope.posts.splice(0, 0, angular.extend({
-                rows: 3,
-                cols: 3,
+                rows: 2,
+                cols: 2,
                 background: 'url(' + post.url + ') no-repeat center'
             }, post));
+
+            adjustSizes($scope.posts);
 
             $mdToast.show($mdToast.simple().content('New Post: ' + post.title));
 
@@ -100,6 +154,8 @@ pinit.controller('BoardController',
 
         var post = postLookup[postVote.postId];
 
+        post.activity += postVote.vote;
+
         if (post) {
 
             if (postVote.vote > 0) {
@@ -108,16 +164,25 @@ pinit.controller('BoardController',
                 post.votes.down++;
             }
         }
+
+        adjustSizes($scope.posts);
+
+        $scope.$apply();
     });
 
     board.on('newComment', function(postComment) {
 
         var post = postLookup[postComment.postId];
 
-        if (post) {
+        post.activity++;
 
+        if (post) {
             post.comments.splice(0, 0, postComment.comment);
         }
+
+        adjustSizes($scope.posts);
+
+        $scope.$apply();
     });
 
     board.emit('refresh');

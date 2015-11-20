@@ -11,17 +11,19 @@
                 <md-grid-tile-footer class="postFooter">
                     <div class="postTitle">{{post.title}}</div>
                     <div>
-                        <md-button class="md-icon-button"
+                        <md-button class="md-icon-button postButton"
+                            ng-class="{ up: hasVoted(post.id, 1) }"
                             ng-click="vote(post.id, 1)">
                             <i class="fa fa-chevron-up"></i>
                             {{post.votes.up}}
                         </md-button>
-                        <md-button class="md-icon-button"
+                        <md-button class="md-icon-button postButton"
+                            ng-class="{ down: hasVoted(post.id, -1) }"
                             ng-click="vote(post.id, -1)">
                             <i class="fa fa-chevron-down"></i>
                             {{post.votes.down}}
                         </md-button>
-                        <md-button class="md-icon-button"
+                        <md-button class="md-icon-button postButton"
                             ng-click="openComments(post, $event)">
                             <i class="fa fa-comments"></i>
                             {{post.comments.length}}

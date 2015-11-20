@@ -1,6 +1,18 @@
 
+body {
+    background-color: #333;
+}
+
+md-grid-list {
+    background-color: #333;
+}
+
+md-content {
+    background-color: #333;
+}
+
 .board {
-    height: calc(100% - 64px);
+    height: calc(100% - 74px);
     padding: 5px;
 }
 
@@ -9,8 +21,22 @@
     transition: all 0.7s ease;
 }
 
+.post .postButton {
+    font-weight: 600;
+    font-size: 17px;
+}
+
+.post .postButton.up {
+    color: #4CAF50;
+}
+
+.post .postButton.down {
+    color: #F44336;
+}
+
 .post .postFooter {
     height: auto;
+    background-color: rgba(0,0,0,0.5);
 }
 
 .post .postFooter .postTitle {
