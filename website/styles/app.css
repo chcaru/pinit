@@ -8,10 +8,12 @@ md-content {
     height: calc(100% - 75px);
 }
 
+md-dialog-content {
+    margin-top: 75px;
+}
+
 .logo {
     font-size: 24px;
-    /*width: auto;*/
-    /*margin-left: 0px;*/
 }
 
 .seperator {
