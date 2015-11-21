@@ -1,9 +1,9 @@
 # pinit
 
-This is a simple image board. It uses Angular, Angular Material Design, NodeJS, and WebSockets to provide a realtime image board.
+This is a simple image board. It uses [Angular](https://angularjs.org/), [Angular Material](https://material.angularjs.org/latest/), [NodeJS](http://nodejs.org/), and WebSockets to provide a realtime image board.
 
 ## Setup:
-1. Execute the install script or install NodeJS and MongoDB some other way:
+1. Execute the install script or install [NodeJS](http://nodejs.org/) and [MongoDB](https://www.mongodb.org/) some other way:
 ```shell
   install.sh
   ```
@@ -15,4 +15,4 @@ This is a simple image board. It uses Angular, Angular Material Design, NodeJS, 
 ```shell
   run.sh
   ```
-4. Navigate to [localhost]('localhost') in your browser.
+4. Navigate to [localhost](http://localhost/) in your browser.
