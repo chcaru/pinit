@@ -4,15 +4,15 @@ This is a simple image board. It uses [Angular](https://angularjs.org/), [Angula
 
 ## Setup:
 1. Execute the install script or install [NodeJS](http://nodejs.org/) and [MongoDB](https://www.mongodb.org/) some other way:
-```
-install.sh
-```
+	```
+	install.sh
+	```
 2. Execute the setup script:
-```
-setup.sh
-```
+	```
+	setup.sh
+	```
 3. Run the server with:
-```
-run.sh
-```
+	```
+	run.sh
+	```
 4. Navigate to [localhost](http://localhost/) in your browser.
