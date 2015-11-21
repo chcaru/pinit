@@ -14,6 +14,12 @@ pinit.controller('AddPostDialogController',
     };
 
     $scope.submitPost = function() {
+        var image = new Image(); 
+        image.src = $scope.url; //your image path here
+        if (image.width == 0) {
+            alert("URL is not a valid image!");
+            return;
+        }
 
         var timestamp = sessionStorage['post'] || 0;
         var delta = Date.now() - timestamp;
