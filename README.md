@@ -3,12 +3,11 @@
 This is a simple image board. It uses Angular, Angular Material Design, NodeJS, and WebSockets to provide a realtime image board.
 
 ## Setup:
-1. Install script:
+1. Execute the install script or install NodeJS and MongoDB some other way:
 ```shell
   install.sh
   ```
-or install NodeJS and MongoDB some other way
-2. Setup script:
+2. Execute the setup script:
 ```shell
   setup.sh
   ```
