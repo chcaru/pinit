@@ -12,37 +12,36 @@
     </md-toolbar>
     <md-dialog-content style="max-width:800px;max-height:810px;min-width:425px;">
         <div class="md-dialog-content">
-            <md-list>
-                <md-list-item class="md-2-line">
-                    <form flex name="commentForm"
-                        ng-submit="submitComment()"
-                        autocomplete="off">
-                        <md-input-container class="md-block">
-                            <label>Your Comment</label>
-                            <input md-maxlength="100" md-minlength="2"
-                                name="comment"
-                                ng-model="comment">
-                            <div ng-messages="commentForm.comment.$error">
-                                <div ng-message="md-minlength">
-                                    Say a little more than that...
-                                </div>
-                                <div ng-message="md-maxlength">
-                                    Too much! Say less...
-                                </div>
-                            </div>
-                        </md-input-container>
-                        <input class="ng-hide" type="submit" id="submit">
-                    </form>
-                    <md-divider ng-show="post.comments.length > 0"></md-divider>
-                </md-list-item>
-                <md-list-item class="md-2-line"
-                    ng-repeat="comment in post.comments track by $index">
-                    <div class="md-list-item-text">
-                        <h3>{{comment}}</h3>
+            <form flex name="commentForm"
+                ng-submit="submitComment()"
+                autocomplete="off">
+                <md-input-container class="md-block">
+                    <label>Your Comment</label>
+                    <input md-maxlength="100" md-minlength="2"
+                        name="comment"
+                        ng-model="comment">
+                    <div ng-messages="commentForm.comment.$error">
+                        <div ng-message="md-minlength">
+                            Say a little more than that...
+                        </div>
+                        <div ng-message="md-maxlength">
+                            Too much! Say less...
+                        </div>
                     </div>
-                    <md-divider ng-if="!$last"></md-divider>
-                </md-list-item>
-            </md-list>
+                </md-input-container>
+                <input class="ng-hide" type="submit" id="submit">
+            </form>
+            <md-content class="commentsContent">
+                <md-list>
+                    <md-list-item class="md-2-line"
+                        ng-repeat="comment in post.comments track by $index">
+                        <div class="md-list-item-text">
+                            <h3>{{comment}}</h3>
+                        </div>
+                        <md-divider ng-if="!$last"></md-divider>
+                    </md-list-item>
+                </md-list>
+            </md-content>
         </div>
     </md-dialog-content>
 </md-dialog>

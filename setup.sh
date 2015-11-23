@@ -1,4 +1,4 @@
 
-npm install
+sudo npm install
 
-mkdir data
+#mkdir data

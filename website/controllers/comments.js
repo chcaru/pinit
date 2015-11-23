@@ -1,6 +1,7 @@
 
-pinit.controller('CommentsDialogController', ['$scope', '$mdDialog', 'board',
-    function($scope, $mdDialog, board) {
+pinit.controller('CommentsDialogController',
+    ['$scope', '$mdDialog', 'posts',
+        function($scope, $mdDialog, posts) {
 
     $scope.comment = '';
 
@@ -10,22 +11,13 @@ pinit.controller('CommentsDialogController', ['$scope', '$mdDialog', 'board',
 
     $scope.submitComment = function() {
 
-        var timestamp = sessionStorage['c-' + $scope.post.id] || 0;
-        var delta = Date.now() - timestamp;
-
-        if (delta < 1500) {
+        if (!posts.canComment($scope.post.id)) {
             return;
         }
 
         if ($scope.comment.length <= 100 && $scope.comment.length > 2) {
-            //$scope.post.comments.splice(0, 0, $scope.comment);
 
-            board.emit('comment', {
-                postId: $scope.post.id,
-                comment: $scope.comment
-            });
-
-            sessionStorage['c-' + $scope.post.id] = Date.now();
+            posts.comment($scope.post.id, $scope.comment);
         }
 
         $scope.comment = '';

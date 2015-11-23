@@ -2,8 +2,8 @@
 var isUrl = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/gi;
 
 pinit.controller('AddPostDialogController',
-    ['$scope', '$mdDialog', 'board', 'userService',
-    function($scope, $mdDialog, board, user) {
+    ['$scope', '$mdDialog', 'posts',
+    function($scope, $mdDialog, posts) {
 
     $scope.title = '';
     $scope.desc = '';
@@ -15,10 +15,7 @@ pinit.controller('AddPostDialogController',
 
     $scope.submitPost = function() {
 
-        var timestamp = sessionStorage['post'] || 0;
-        var delta = Date.now() - timestamp;
-
-        if (delta < 13337
+        if (!posts.canPost()
             || $scope.title.length < 2
             || $scope.title.length > 45
             || $scope.desc.length > 150
@@ -28,16 +25,12 @@ pinit.controller('AddPostDialogController',
         }
 
         var post = {
-            id: uuid(),
             title: $scope.title,
             desc: $scope.desc,
-            url: $scope.url,
-            user: user.getUserId()
+            url: $scope.url
         };
 
-        board.emit('post', post);
-
-        sessionStorage['post'] = Date.now();
+        post = posts.post(post);
 
         $mdDialog.hide(post);
     };

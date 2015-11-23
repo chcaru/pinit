@@ -4,12 +4,20 @@ md-toolbar {
     top: 0;
 }
 
-md-content {
+md-dialog-content {
+    margin-top: 75px;
+}
+
+.boardContent {
     height: calc(100% - 75px);
 }
 
-md-dialog-content {
-    margin-top: 75px;
+.commentsContent {
+    max-height: 49%;
+}
+
+.postCommentsContent {
+    max-height: 36%;
 }
 
 .logo {
@@ -31,10 +39,27 @@ md-dialog-content {
     padding: 5px;
 }
 
+.justPost {
+    padding: 10px;
+}
+
+.postInfo {
+    padding: 20px;
+}
+
+.postImage {
+    max-height: 50%;
+    max-width: 50%;
+}
+
 .post {
     background-size: 150% !important;
     transition: all 0.7s ease;
     -webkit-user-select: none;
+}
+
+.post:hover {
+    background-size: 140% !important;
 }
 
 .post .postButton {
@@ -42,11 +67,11 @@ md-dialog-content {
     font-size: 17px;
 }
 
-.post .postButton.up {
+.up {
     color: #4CAF50;
 }
 
-.post .postButton.down {
+.down {
     color: #F44336;
 }
 
@@ -57,4 +82,10 @@ md-dialog-content {
 
 .post .postFooter .postTitle {
     margin: 16px 0 0 16px;
+}
+
+.post .postLink {
+    height: 100%;
+    width: 100%;
+    cursor: pointer;
 }

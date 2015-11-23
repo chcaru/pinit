@@ -1,5 +1,5 @@
 <div class="board">
-    <md-content>
+    <md-content class="boardContent">
         <md-button class="md-fab md-primary md-hue-2 addPostFab"
             aria-label="New Post"
             ng-click="createPost($event)">
@@ -37,6 +37,7 @@
                         </md-button>
                     </div>
                 </md-grid-tile-footer>
+                <a class="postLink" ng-href="/#/post/{{post.id}}"></a>
             </md-grid-tile>
         </md-grid-list>
     </md-content>
