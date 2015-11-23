@@ -22,6 +22,11 @@ Posts.prototype.getRecent = function() {
     return this.recent.slice(start);
 };
 
+Posts.prototype.getPost = function(postId) {
+
+    return this.posts[postId];
+};
+
 Posts.prototype.adjust = function(post, change) {
 
     var activity = post.activity += change;
