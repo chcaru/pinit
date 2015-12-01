@@ -18,10 +18,10 @@
                 <md-input-container class="md-block">
                     <label>Title</label>
                     <input md-maxlength="35" name="title" ng-model="title"
-                      required ng-minlength="2" ng-maxlength="35">
+                      required minlength="2">
                     <div ng-messages="postForm.title.$error">
                       <div ng-message="required">Required</div>
-                      <div ng-message="maxlength">Max length 35 characters</div>
+                      <div ng-message="md-maxlength">Max length 35 characters</div>
                       <div ng-message="minlength">Min length 2 characters</div>
                     </div>
                 </md-input-container>
@@ -29,14 +29,17 @@
                   <label>Description</label>
                   <textarea ng-model="desc"
                       columns="1" md-maxlength="150" rows="5" required></textarea>
-                  <div ng-messages="postForm.desc.$error" ng-maxlength="150">
+                  <div ng-messages="postForm.desc.$error">
                     <div ng-message="required">Required</div>
-                    <div ng-message="maxlength">Max length 150 characters</div>
+                    <div ng-message="md-maxlength">Max length 150 characters</div>
                   </div>
                 </md-input-container>
                 <md-input-container class="md-block">
                     <label>Image URL</label>
-                    <input name="url" ng-model="url">
+                    <input name="url" ng-model="url" required>
+                    <div ng-messages="postForm.url.$error">
+                      <div ng-message="required">Required</div>
+                    </div>
                 </md-input-container>
                 <input class="ng-hide" type="submit" id="submit">
                 <div layout="row">
