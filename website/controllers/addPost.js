@@ -14,7 +14,7 @@ pinit.controller('AddPostDialogController',
     };
 
     $scope.submitPost = function() {
-        var image = new Image(); 
+        var image = new Image();
         image.src = $scope.url; //your image path here
         if (image.width == 0) {
             alert("URL is not a valid image!");
@@ -22,13 +22,16 @@ pinit.controller('AddPostDialogController',
         }
 
         if (!posts.canPost()
-            || $scope.title.length < 2
-            || $scope.title.length > 45
-            || $scope.desc.length > 150
             || !isUrl.test($scope.url)) {
-
+            alert('Unable to post!');
             return;
         }
+
+        if ($scope.title.length < 2 || $scope.title.length > 35 ||
+          $scope.desc.length < 0 || $scope.desc.length > 150) {
+            alert('Invalid input lengths!');
+            return;
+          }
 
         var post = {
             title: $scope.title,
